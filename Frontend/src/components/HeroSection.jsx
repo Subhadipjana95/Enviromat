@@ -78,7 +78,7 @@ const HeroSection = () => {
                 <img 
                   src="https://images.unsplash.com/photo-1603977865139-05ba89d5eefe?w=900&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NzJ8fGdyZWVuJTIwd2FzdGUlMjBpbGx1c3RyYXRpb258ZW58MHwxfDB8fHwy" 
                   alt="Green leaves background" 
-                  className="w-full h-full object-cover opacity-60"
+                  className="w-full h-full object-cover"
                 />
               </div>
               

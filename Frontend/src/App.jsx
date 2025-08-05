@@ -3,6 +3,8 @@ import Navbar from './components/Navbar';
 import HeroSection from './components/HeroSection';
 import LegacySection from './components/LegacySection';
 import ServicesCard from './components/ServicesCard';
+import SignupForm from './components/SignUpForm';
+import LoginForm from './components/LoginForm';
 
 
 
@@ -15,6 +17,9 @@ function App() {
       <HeroSection />
       <LegacySection />
       <ServicesCard />
+      <SignupForm />
+      <LoginForm />
+
     </div>
   );
 }

@@ -22,9 +22,10 @@ const Navbar = () => {
               <button className="bg-[#f9fafb4f] backdrop-blur-xl px-2 gap-1 h-10 border border-gray-300 rounded-full flex items-center justify-center hover:border-gray-400 transition-colors font-[500] text-[#4a5565]">
                 {/* <Search className="w-4 h-4 text-gray-600" /> */}
                 300
-                <img src="/Coin.png" alt="coin" className="w-7 h-7 text-gray-600" />
+                <img src="/Coin.png" alt="coins" className="w-7 h-7 text-gray-600" />
               </button>
               <button className="bg-[#f9fafb4f] backdrop-blur-xl w-10 h-10 border border-gray-300 rounded-full flex items-center justify-center hover:border-gray-400 transition-colors">
+                {/* <Login /> */}
                 <User className="w-5 h-5 text-gray-600" />
               </button>
             </div>
