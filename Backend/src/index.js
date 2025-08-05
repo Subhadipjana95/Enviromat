@@ -1,5 +1,5 @@
 const express = require("express")
-const dbconnect =require("./config/database")
+const {dbconnect} =require("./config/database")
 const cloudinary = require("./config/cloudinary");
 const cookieParser = require("cookie-parser");
 const fileUpload = require("express-fileupload");
