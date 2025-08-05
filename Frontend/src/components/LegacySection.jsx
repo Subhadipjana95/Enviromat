@@ -1,6 +1,8 @@
 import React from 'react';
 import { Instagram, Play, Facebook } from 'lucide-react';
 
+import { motion } from "motion/react"
+
 const LegacySection = () => {
   const valuesTags = [
     { text: 'Sustainable', color: 'bg-green-200 text-green-800' },
@@ -11,6 +13,12 @@ const LegacySection = () => {
     { text: 'Thoughtful', color: 'bg-green-200 text-green-800' },
     { text: 'Progressive', color: 'bg-green-200 text-green-800' },
     { text: 'Forward-looking', color: 'bg-purple-200 text-purple-800' },
+    { text: 'Ethical', color: 'bg-purple-200 text-purple-800' },
+    { text: 'Eco-conscious', color: 'bg-purple-200 text-purple-800' },
+    { text: 'Pioneering', color: 'bg-green-200 text-green-800' },
+    { text: 'Responsible', color: 'bg-purple-200 text-purple-800' },
+    { text: 'Thoughtful', color: 'bg-green-200 text-green-800' },
+    { text: 'Progressive', color: 'bg-green-200 text-green-800' },
   ];
 
   return (
@@ -29,10 +37,10 @@ const LegacySection = () => {
         </div>
 
         {/* Three Column Layout */}
-        <div className="grid lg:grid-cols-3 gap-8 items-center">
+        <div className="grid lg:grid-cols-4 gap-4 items-center">
           {/* Left Column - Social Media */}
-          <div className="relative">
-            <div className="bg-gradient-to-br from-green-300 to-green-500 rounded-3xl p-8 h-80 relative overflow-hidden">
+          <div className="relative col-span-1">
+            <div className="bg-gradient-to-br from-green-300 to-green-500 rounded-4xl p-8 h-80 relative overflow-hidden">
               {/* Background texture/image */}
               <div className="absolute inset-0 rounded-3xl overflow-hidden">
                 <img 
@@ -65,20 +73,24 @@ const LegacySection = () => {
           </div>
 
           {/* Center Column - CTA and Values */}
-          <div className="text-center space-y-8">
-            <div className="space-y-6">
-              <p className="text-2xl font-medium text-gray-800">
+          <div className="text-center space-y-8 bg-gray-200/80 h-80 rounded-4xl col-span-2">
+            <div className="space-y-6 mt-6">
+              <p className="text-md font-medium text-gray-800 tracting-tighter leading-snug">
                 Join us in sculpting<br />
                 green and sustainable world
               </p>
               
-              <button className="px-8 py-3 bg-gray-900 text-white rounded-full hover:bg-gray-800 transition-colors font-medium">
+              <motion.button 
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                className="px-5 py-2 bg-gray-900 text-white rounded-full hover:bg-gray-800 transition-colors font-medium"
+              >
                 Get Started
-              </button>
+              </motion.button>
             </div>
 
             {/* Values Tags */}
-            <div className="flex flex-wrap justify-center gap-3 max-w-md mx-auto">
+            <div className="flex flex-wrap justify-around gap-2 max-w-[95%] mx-auto">
               {valuesTags.map((tag, index) => (
                 <span 
                   key={index}
@@ -94,8 +106,8 @@ const LegacySection = () => {
           </div>
 
           {/* Right Column - Stone/Materials Image */}
-          <div className="relative">
-            <div className="bg-gray-300 rounded-3xl h-80 overflow-hidden">
+          <div className="relative col-span-1">
+            <div className="bg-gray-300 rounded-4xl h-80 overflow-hidden">
               <img 
                 src="https://images.unsplash.com/photo-1511593358241-7eea1f3c84e5?w=600&h=600&fit=crop&crop=center" 
                 alt="Natural stone materials" 

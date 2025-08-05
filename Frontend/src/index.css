@@ -6,3 +6,25 @@ html,
 body {
   font-family: "Josefin Sans", sans-serif;
 }
+ button{
+  cursor: pointer;
+ }
+
+ /* Marquee animations */
+@keyframes marquee-left {
+  0% {
+    transform: translateX(0%);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+@keyframes marquee-right {
+  0% {
+    transform: translateX(-50%);
+  }
+  100% {
+    transform: translateX(0%);
+  }
+}

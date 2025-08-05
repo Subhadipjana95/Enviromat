@@ -1,5 +1,6 @@
 import React from 'react';
 import { ArrowRight, FileText } from 'lucide-react';
+import { motion } from "motion/react";
 
 const ServicesSection = () => {
   return (
@@ -96,9 +97,14 @@ const ServicesSection = () => {
 
                 {/* Explore More Button */}
                 <div className="absolute bottom-8 right-8">
-                  <button className="px-6 py-3 bg-white/90 backdrop-blur-sm text-gray-700 rounded-full font-medium hover:bg-white transition-colors shadow-lg">
+                  <motion.button 
+                    whileHover={{ scale: 1.05 }}
+                    whileTap={{ scale: 0.95 }}
+                    className="px-6 py-3 bg-white/90 backdrop-blur-sm text-gray-700 rounded-full font-medium hover:bg-white transition-colors shadow-lg"
+                  >
                     Explore More
-                  </button>
+                  </motion.button>
+
                 </div>
 
                 {/* Top Right Icon */}
