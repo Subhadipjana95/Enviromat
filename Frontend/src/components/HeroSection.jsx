@@ -51,14 +51,14 @@ const HeroSection = () => {
             </div>
             {/* Product Showcases */}
             <div className="flex space-x-4 pt-8">
-              <div className="w-25 h-30 bg-gray-300 rounded-lg overflow-hidden">
+              <div className="w-25 h-30 bg-gray-300 rounded-xl overflow-hidden">
                 <img 
                   src="https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=400&h=400&fit=crop&crop=center" 
                   alt="Sustainable product 1" 
                   className="w-full h-full object-cover"
                 />
               </div>
-              <div className="w-25 h-30 bg-green-200 rounded-lg overflow-hidden">
+              <div className="w-25 h-30 bg-green-200 rounded-xl overflow-hidden">
                 <img 
                   src="https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?w=400&h=400&fit=crop&crop=center" 
                   alt="Sustainable product 2" 
@@ -76,7 +76,7 @@ const HeroSection = () => {
               {/* Large leaf background image */}
               <div className="h-[98%] -translate-y-[0.9%] w-[95%] rounded-4xl overflow-hidden">
                 <img 
-                  src="https://images.unsplash.com/photo-1440342359743-84fcb8c21f21?w=800&h=1000&fit=crop&crop=center" 
+                  src="https://images.unsplash.com/photo-1603977865139-05ba89d5eefe?w=900&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NzJ8fGdyZWVuJTIwd2FzdGUlMjBpbGx1c3RyYXRpb258ZW58MHwxfDB8fHwy" 
                   alt="Green leaves background" 
                   className="w-full h-full object-cover opacity-60"
                 />
