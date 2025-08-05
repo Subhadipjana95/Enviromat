@@ -25,7 +25,7 @@ const ProTeamCard = () => {
         
         {/* Content */}
         <div className="space-y-1">
-          <h3 className="text-md font-bold text-gray-700 tracking-tight">Top Users</h3>
+          <h3 className="text-md font-bold text-[#C27BFF] tracking-tight">Top Users</h3>
           <p className="text-gray-600 text-[12px] leading-tight tracking-normal">
             Leading the way in sustainable<br />
             waste management solutions
