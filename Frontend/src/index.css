@@ -29,6 +29,15 @@ body {
   }
 }
 
+.serviceCard {
+  will-change: transform, opacity;
+  backface-visibility: hidden;
+  perspective: 1000px;
+}
+
+.serviceCardContainer {
+  transform-style: preserve-3d;
+  
 .spinner {
    width: 56px;
    height: 56px;

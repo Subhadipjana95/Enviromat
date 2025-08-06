@@ -1,13 +1,6 @@
 import React from "react";
-import Lenis from "lenis";
-import "lenis/dist/lenis.css";
-
-
-
 // import OpenRoute from "./components/core/Auth/OpenRoute";
 // import PrivateRoute from "./components/core/Auth/PrivateRoute";
-
-
 import Navbar from './components/common/Navbar';
 import Home from './Pages/Home';
 import Login from './Pages/Login';
@@ -17,24 +10,6 @@ import { Route, Routes, useLocation, useNavigate } from 'react-router-dom';
 import UpdatePassword from './Pages/UpdatePassword';
 import VerifyEmail from './Pages/VerifyEmail';
 import ForgotPassword from './Pages/ForgotPassword';
-// Lenis Code --->>>
-
-// // Initialize Lenis
-// const lenis = new Lenis({
-//   autoRaf: true,
-// });
-
-// // Listen for the scroll event and log the event data
-// lenis.on('scroll', (e) => {
-//   console.log(e);
-// });
-
-// // Add a requestAnimationFrame loop to handle the scroll
-// function raf(time) {
-//   lenis.raf(time);
-//   requestAnimationFrame(raf);
-// }
-// requestAnimationFrame(raf);
 
 function App() {
   const location = useLocation();
