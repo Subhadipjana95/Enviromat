@@ -212,10 +212,10 @@ const HeroSection = () => {
 
   return (
     <section ref={sectionRef} className="relative min-h-screen overflow-hidden">
-      <div className="max-w-full mx-auto sm:px-5 lg:pl-8 py-2 lg:py-2">
+      <div className="max-w-full mx-auto sm:px-5 lg:pl-8 py-2 lg:py-3">
         <div className="grid lg:grid-cols-2 gap-10 items-center">
           {/* Left Content */}
-          <div className="flex flex-col justify-end h-[90%] w-full">
+          <div className="flex flex-col justify-end h-[90%] w-full ">
             {/* Title Container */}
             <div className="title flex flex-col gap-4 mb-[60px]">
               {/* Main Heading */}

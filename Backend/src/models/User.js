@@ -29,7 +29,7 @@ const userSchema = new mongoose.Schema({
     },
     accountType: {
       type: String,
-      enum: ["Admin", "User"],
+      enum: ["Admin", "User", "Picker"],
       default: "User",
       required: true,
     },
