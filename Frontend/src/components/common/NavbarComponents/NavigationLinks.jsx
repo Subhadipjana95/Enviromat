@@ -4,10 +4,10 @@ import CustomNavLink from './CustomNavLink';
 const NavigationLinks = ({ addToNavButtonsRefs }) => {
   const links = [
     { to: "/", label: "Home" },
-    { to: "/about", label: "About" },
-    { to: "/shop", label: "Shop" },
     { to: "/services", label: "Services" },
-    { to: "/community", label: "Community" }
+    { to: "/shop", label: "Shop" },
+    { to: "/community", label: "Community" },
+    { to: "/about", label: "About" }
   ];
 
   return (
