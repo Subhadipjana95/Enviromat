@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-const WasteUploadSchema = new mongoose.Schema({
+const PickupRequestSchema = new mongoose.Schema({
     userId: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'User',
@@ -44,10 +44,23 @@ const WasteUploadSchema = new mongoose.Schema({
         type: String,
         required: true
     },
+    pickupBy: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "ServiceRunner", // who delivered this order
+        default: null,
+    },
+    pickupStatus: {
+        type: String,
+        enum: ["processing", "assigned", "delivered", "cancelled"],
+        default: "processing",
+    },
     date: {
         type: Date,
         default: Date.now
+    },
+    pickupDate:{
+        type:Date,
     }
 });
 
-module.exports = mongoose.model('WasteUpload', WasteUploadSchema);
+module.exports = mongoose.model('PickupRequest', PickupRequestSchema);

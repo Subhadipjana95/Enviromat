@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const{uploadWaste}=require('../controllers/WasteController')
+const{uploadWaste}=require('../controllers/PickupRequestController');
 const { auth } = require("../middleware/auth")
 
 

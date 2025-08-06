@@ -1,4 +1,4 @@
-const WasteUpload = require('../models/WasteModel');
+const PickupRequest = require('../models/PickupRequestModel');
 const {uploadImageToCloudinary}=require('../utils/imageUploader');
 
 exports.uploadWaste= async (req, res) => {
@@ -11,7 +11,7 @@ exports.uploadWaste= async (req, res) => {
             if (!result || !result.secure_url) {
                 return res.status(400).json({ error: 'Image upload failed.' });
             }
-            const waste = new WasteUpload({
+            const waste = new PickupRequest({
                 userId: req.user.id,
                 wasteType,
                 imageURL:result.secure_url,
