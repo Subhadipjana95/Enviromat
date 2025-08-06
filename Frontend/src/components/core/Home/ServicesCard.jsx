@@ -61,9 +61,9 @@ const ServicesCard = ({
                 <div className="absolute inset-0 bg-gradient-to-br from-green-400/20 to-green-600/20"></div>
 
                 {/* Progress Rate Card */}
-                <div className="absolute top-8 left-8 bg-white/90 backdrop-blur-sm rounded-2xl p-6 shadow-lg">
+                <div className="absolute top-8 left-8 bg-white/50 backdrop-blur-sm rounded-2xl p-6 shadow-lg">
                   <div className="text-center space-y-4">
-                    <p className="text-gray-700 text-sm font-normal">
+                    <p className="text-grey-700 text-sm font-normal">
                       {progressLabel}
                     </p>
                     
@@ -75,7 +75,7 @@ const ServicesCard = ({
                           cx="50"
                           cy="50"
                           r="40"
-                          stroke="#e5e7eb"
+                          stroke="#feebe746"
                           strokeWidth="8"
                           fill="none"
                         />
@@ -94,18 +94,10 @@ const ServicesCard = ({
                         />
                       </svg>
                       <div className="absolute inset-0 flex items-center justify-center">
-                        <span className="text-2xl font-bold text-gray-900">{progressValue}%</span>
+                        <span className="text-lg font-bold text-gray-700">{progressValue}%</span>
                       </div>
                     </div>
                   </div>
-                </div>
-
-                {/* Details Link */}
-                <div className="absolute bottom-8 left-8">
-                  <button className="flex items-center space-x-2 text-gray-700 hover:text-gray-900 transition-colors">
-                    <span className="text-sm font-medium">{detailsText}</span>
-                    <ArrowRight className="w-4 h-4" />
-                  </button>
                 </div>
 
                 {/* Explore More Button */}
@@ -113,7 +105,7 @@ const ServicesCard = ({
                   <motion.button 
                     whileHover={{ scale: 1.05 }}
                     whileTap={{ scale: 0.95 }}
-                    className="px-6 py-3 bg-white/90 backdrop-blur-sm text-gray-700 rounded-full font-medium hover:bg-white transition-colors shadow-lg"
+                    className="px-6 py-3 bg-white/50 backdrop-blur-sm text-gray-700 rounded-full font-medium hover:bg-white transition-colors shadow-lg"
                   >
                     {exploreText}
                   </motion.button>
@@ -121,7 +113,7 @@ const ServicesCard = ({
 
                 {/* Top Right Icon */}
                 <div className="absolute top-8 right-8">
-                  <div className="w-12 h-12 bg-white/90 backdrop-blur-sm rounded-full flex items-center justify-center shadow-lg">
+                  <div className="w-12 h-12 bg-white/50 backdrop-blur-sm rounded-full flex items-center justify-center shadow-lg">
                     {React.createElement(icon, { className: "w-6 h-6 text-gray-600" })}
                   </div>
                 </div>

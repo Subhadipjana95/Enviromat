@@ -1,11 +1,13 @@
 import React, { useState } from 'react';
 import { Star, Quote } from 'lucide-react';
-import { motion, AnimatePresence } from "motion/react";
+import { motion, AnimatePresence } from "framer-motion";
+import NumberTicker from './core/Home/AnimatedNumberTicker';
 
 const TestimonialSection = () => {
   const [hoveredCard, setHoveredCard] = useState(null);
   const [hoveredStar, setHoveredStar] = useState({ cardId: null, starIndex: null });
 
+  // Expanded testimonials array for infinite scroll effect
   const testimonials = [
     {
       id: 1,
@@ -33,213 +35,258 @@ const TestimonialSection = () => {
       content: "Game-changing environmental responsibility and cutting-edge solutions.",
       rating: 5,
       image: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=150&h=150&fit=crop&crop=face"
+    },
+    {
+      id: 4,
+      name: "Sarah Williams",
+      role: "Sustainability Consultant",
+      company: "EcoFuture Corp",
+      content: "Outstanding innovation in renewable materials. Their approach to sustainability is truly inspiring.",
+      rating: 5,
+      image: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=900&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NHx8ZmFjZXxlbnwwfHwwfHx8MA%3D%3D"
+    },
+    {
+      id: 5,
+      name: "David Kim",
+      role: "Operations Director",
+      company: "Green Building Solutions",
+      content: "Exceptional quality. These materials have transformed our projects.",
+      rating: 5,
+      image: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=150&h=150&fit=crop&crop=face"
+    },
+    {
+      id: 6,
+      name: "Lisa Thompson",
+      role: "Environmental Engineer",
+      company: "Sustainable Designs Ltd",
+      content: "Innovative solutions that exceed expectations. Blend of sustainability and performance.",
+      rating: 5,
+      image: "https://images.unsplash.com/photo-1505033575518-a36ea2ef75ae?w=150&h=150&fit=crop&crop=face"
+    },
+    {
+      id: 7,
+      name: "James Wilson",
+      role: "Chief Technology Officer",
+      company: "NextGen Materials",
+      content: "Revolutionary technology that's changing the industry. Highly recommend their expertise.",
+      rating: 5,
+      image: "https://images.unsplash.com/photo-1560250097-0b93528c311a?w=150&h=150&fit=crop&crop=face"
+    },
+    {
+      id: 8,
+      name: "Maria Garcia",
+      role: "Research Scientist",
+      company: "BioMaterials Institute",
+      content: "Cutting-edge research meets practical application. Their materials are groundbreaking.",
+      rating: 5,
+      image: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=150&h=150&fit=crop&crop=face"
     }
   ];
 
+  // Duplicate testimonials for seamless infinite scroll
+  const duplicatedTestimonials = [...testimonials, ...testimonials, ...testimonials];
+
+  // Individual testimonial card component
+  const TestimonialCard = ({ testimonial, index }) => (
+    <motion.div
+      key={testimonial.id}
+      onHoverStart={() => setHoveredCard(testimonial.id)}
+      onHoverEnd={() => setHoveredCard(null)}
+      className="bg-[#F3F4F6] rounded-3xl p-6 border border-gray-300 relative group cursor-pointer min-w-[350px] mx-3"
+      style={{ minHeight: '280px' }}
+    >
+      {/* Subtle glow effect on hover */}
+      <AnimatePresence>
+        {hoveredCard === testimonial.id && (
+          <motion.div
+            className="absolute inset-0 bg-gradient-to-r from-green-100/50 to-purple-100/50 rounded-3xl"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.3 }}
+          />
+        )}
+      </AnimatePresence>
+
+      <div className="relative z-10">
+        {/* Quote Icon with interactive animation */}
+        <motion.div 
+          className="mb-3"
+          whileHover={{ scale: 1.1, rotate: 5 }}
+          transition={{ duration: 0.2 }}
+        >
+          <motion.div 
+            className="w-12 h-12 bg-green-100 rounded-full flex items-center justify-center group-hover:bg-green-200 transition-colors duration-300"
+            whileTap={{ scale: 0.95 }}
+          >
+            <Quote className="w-6 h-6 text-green-600" />
+          </motion.div>
+        </motion.div>
+
+        {/* Interactive Rating Stars */}
+        <div className="flex items-center mb-4">
+          {[...Array(testimonial.rating)].map((_, i) => (
+            <motion.div
+              key={i}
+              whileHover={{ 
+                scale: 1.3, 
+                rotate: 15,
+              }}
+              onHoverStart={() => setHoveredStar({ cardId: testimonial.id, starIndex: i })}
+              onHoverEnd={() => setHoveredStar({ cardId: null, starIndex: null })}
+              transition={{ duration: 0.2 }}
+              className="cursor-pointer"
+            >
+              <Star 
+                className={`w-5 h-5 text-yellow-400 fill-current transition-all duration-200 mr-1 ${
+                  hoveredStar.cardId === testimonial.id && hoveredStar.starIndex >= i 
+                    ? 'drop-shadow-md' 
+                    : ''
+                }`} 
+              />
+            </motion.div>
+          ))}
+        </div>
+
+        {/* Content */}
+        <motion.p 
+          className="text-gray-600 leading-relaxed mb-6 text-sm font-medium"
+          initial={{ opacity: 0.9 }}
+          whileHover={{ opacity: 1 }}
+          transition={{ duration: 0.2 }}
+        >
+          "{testimonial.content}"
+        </motion.p>
+
+        {/* Author section */}
+        <div className="flex items-center space-x-4">
+          <motion.div
+            className="relative"
+          >
+            <motion.img
+              src={testimonial.image}
+              alt={testimonial.name}
+              className="w-12 h-12 rounded-full object-cover border-1 border-green-200 group-hover:border-purple-300 transition-colors duration-300"
+            />
+          </motion.div>
+          
+          <div>
+            <motion.h4 
+              className="font-bold text-gray-700 text-base"
+            >
+              {testimonial.name}
+            </motion.h4>
+            <motion.p 
+              className="text-sm text-purple-500 font-medium"
+            >
+              {testimonial.role}
+            </motion.p>
+          </div>
+        </div>
+      </div>
+
+    </motion.div>
+  );
+
   return (
-    <section className="mb-[10rem] bg-[#F9FAFB] relative overflow-hidden">
+    <section className="mt-[6rem] bg-[#F9FAFB] relative overflow-hidden">
       {/* Subtle background animation */}
       <motion.div 
-        className="absolute inset-0 opacity-10"
+        className="absolute inset-0 opacity-5"
         animate={{
           backgroundPosition: ['0% 0%', '100% 100%'],
         }}
         transition={{
-          duration: 20,
+          duration: 25,
           repeat: Infinity,
           repeatType: "reverse",
           ease: "linear"
         }}
         style={{
           backgroundImage: 'radial-gradient(circle, #10B981 1px, transparent 1px)',
-          backgroundSize: '50px 50px',
+          backgroundSize: '60px 60px',
         }}
       />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         {/* Header Section */}
         <motion.div 
-          className="text-center mb-12"
+          className="text-center mb-16"
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
           viewport={{ once: true }}
         >
-          <h2 className="text-5xl lg:text-5xl font-bold text-gray-900 leading-tight mb-4">
+          <h2 className="text-5xl lg:text-6xl font-bold text-gray-900 leading-tight mb-6">
             What Our 
             <motion.span 
-              className="text-purple-400"
+              className="text-purple-400 ml-2"
               whileHover={{ scale: 1.05 }}
               transition={{ duration: 0.2 }}
             > Clients</motion.span><br /> Say 
             <motion.span 
-              className="text-green-400"
+              className="text-green-400 ml-2"
               whileHover={{ scale: 1.05 }}
               transition={{ duration: 0.2 }}
-            >About </motion.span>Us
+            > About </motion.span>Us
           </h2>
         </motion.div>
 
-        {/* Testimonials Grid */}
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {testimonials.map((testimonial, index) => (
+        {/* Infinite Scrolling Testimonials */}
+        <div className="relative">
+          <div className="overflow-hidden">
             <motion.div
-              key={testimonial.id}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: index * 0.1 }}
-              whileHover={{ 
-                y: -4, 
-                scale: 1.02,
-                boxShadow: "0 10px 20px rgba(0,0,0,0.1)"
+              className="flex"
+              animate={{
+                x: [0, -(testimonials.length * 380)],
               }}
-              onHoverStart={() => setHoveredCard(testimonial.id)}
-              onHoverEnd={() => setHoveredCard(null)}
-              className="bg-gray-100 rounded-3xl p-6 border border-gray-300 relative group cursor-pointer"
-              viewport={{ once: true }}
-              layout
+              transition={{
+                x: {
+                  repeat: Infinity,
+                  repeatType: "loop",
+                  duration: testimonials.length * 15, // Adjust speed here
+                  ease: "linear",
+                },
+              }}
+              style={{ width: `${duplicatedTestimonials.length * 380}px` }}
             >
-              {/* Subtle glow effect on hover */}
-              <AnimatePresence>
-                {hoveredCard === testimonial.id && (
-                  <motion.div
-                    className="absolute inset-0 bg-gradient-to-r from-green-100/50 to-purple-100/50 rounded-3xl"
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    exit={{ opacity: 0 }}
-                    transition={{ duration: 0.3 }}
-                  />
-                )}
-              </AnimatePresence>
-
-              <div className="relative z-10">
-                {/* Quote Icon with interactive animation */}
-                <motion.div 
-                  className="mb-2"
-                  whileHover={{ scale: 1.1, rotate: 5 }}
-                  transition={{ duration: 0.2 }}
-                >
-                  <motion.div 
-                    className="w-10 h-10 bg-green-100 rounded-full flex items-center justify-center group-hover:bg-green-200 transition-colors duration-300"
-                    whileTap={{ scale: 0.95 }}
-                  >
-                    <Quote className="w-5 h-5 text-green-600" />
-                  </motion.div>
-                </motion.div>
-
-                {/* Interactive Rating Stars */}
-                <div className="flex items-center mb-3">
-                  {[...Array(testimonial.rating)].map((_, i) => (
-                    <motion.div
-                      key={i}
-                      whileHover={{ 
-                        scale: 1.2, 
-                        rotate: 15,
-                      }}
-                      onHoverStart={() => setHoveredStar({ cardId: testimonial.id, starIndex: i })}
-                      onHoverEnd={() => setHoveredStar({ cardId: null, starIndex: null })}
-                      transition={{ duration: 0.2 }}
-                      className="cursor-pointer"
-                    >
-                      <Star 
-                        className={`w-4 h-4 text-yellow-400 fill-current transition-all duration-200 ${
-                          hoveredStar.cardId === testimonial.id && hoveredStar.starIndex >= i 
-                            ? 'drop-shadow-sm' 
-                            : ''
-                        }`} 
-                      />
-                    </motion.div>
-                  ))}
-                </div>
-
-                {/* Content with subtle animation */}
-                <motion.p 
-                  className="text-gray-500 leading-snug mb-4 text-sm"
-                  initial={{ opacity: 0.8 }}
-                  whileHover={{ opacity: 1 }}
-                  transition={{ duration: 0.2 }}
-                >
-                  "{testimonial.content}"
-                </motion.p>
-
-                {/* Author section with hover effects */}
-                <div className="flex items-center space-x-3">
-                  <motion.div
-                    whileHover={{ scale: 1.1 }}
-                    transition={{ duration: 0.2 }}
-                    className="relative"
-                  >
-                    <motion.img
-                      src={testimonial.image}
-                      alt={testimonial.name}
-                      className="w-10 h-10 rounded-full object-cover border-2 border-green-200 group-hover:border-green-300 transition-colors duration-300"
-                      whileHover={{ rotate: 5 }}
-                    />
-                    {/* Subtle ring animation on hover */}
-                    <motion.div
-                      className="absolute inset-0 rounded-full border-2 border-green-400"
-                    />
-                  </motion.div>
-                  
-                  <div>
-                    <motion.h4 
-                      className="font-semibold text-gray-900 text-sm"
-                      whileHover={{ }}
-                      transition={{ duration: 0.2 }}
-                    >
-                      {testimonial.name}
-                    </motion.h4>
-                    <motion.p 
-                      className="text-xs text-purple-400"
-                      whileHover={{ color: "#9333ea" }}
-                      transition={{ duration: 0.2 }}
-                    >
-                      {testimonial.role}
-                    </motion.p>
-                  </div>
-                </div>
-              </div>
-
-              {/* Subtle corner decoration */}
-              <motion.div
-                className="absolute top-4 right-4 w-2 h-2 bg-green-300 rounded-full opacity-0 group-hover:opacity-100"
-                initial={{ scale: 0 }}
-                whileHover={{ scale: 1 }}
-                transition={{ duration: 0.3, delay: 0.1 }}
-              />
+              {duplicatedTestimonials.map((testimonial, index) => (
+                <TestimonialCard 
+                  key={`${testimonial.id}-${index}`} 
+                  testimonial={testimonial} 
+                  index={index} 
+                />
+              ))}
             </motion.div>
-          ))}
+          </div>
+          
+          {/* Gradient overlays for smooth edges */}
+          <div className="absolute left-0 top-0 w-16 h-full bg-gradient-to-r from-[#F9FAFB] to-transparent pointer-events-none z-10" />
+          <div className="absolute right-0 top-0 w-16 h-full bg-gradient-to-l from-[#F9FAFB] to-transparent pointer-events-none z-10" />
         </div>
 
-        {/* Floating testimonial counter */}
+        {/* Animated Number Ticker Counter */}
         <motion.div
-          className="text-center mt-12"
+          className="text-center mt-16 mb-8"
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.3 }}
           viewport={{ once: true }}
         >
           <motion.div
-            className="inline-flex items-center space-x-2 bg-white/80 backdrop-blur-sm rounded-full px-6 py-3 border border-gray-200 shadow-sm"
-            whileHover={{ scale: 1.03, y: -1 }}
-            transition={{ duration: 0.2 }}
+            className="inline-flex items-center space-x-4 bg-[#F3F4F6] rounded-full px-6 py-3 border border-gray-300"
           >
-            <motion.span 
-              className="text-2xl font-bold text-green-600"
-              animate={{ 
-                scale: [0.8, 0.9, 0.8],
-              }}
-              transition={{ 
-                duration: 2,
-                repeat: Infinity,
-                repeatDelay: 3
-              }}
-            >
-              5000+
-            </motion.span>
-            <span className="text-gray-600 font-medium">Happy Clients</span>
+            <NumberTicker 
+              endValue={5000}
+              duration={4000}
+              suffix="+"
+              className="text-3xl font-semibold text-green-600 tabular-nums"
+              startDelay={500}
+            />
+            <span className="text-gray-700 font-medium text-xl">Happy Clients</span>
           </motion.div>
         </motion.div>
+
       </div>
     </section>
   );

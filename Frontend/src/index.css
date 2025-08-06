@@ -19,7 +19,7 @@ body {
 
 .serviceCardContainer {
   transform-style: preserve-3d;
-  
+}
 .spinner {
    width: 56px;
    height: 56px;

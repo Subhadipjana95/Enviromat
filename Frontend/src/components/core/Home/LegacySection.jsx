@@ -111,7 +111,7 @@ const LegacySection = () => {
 
   return (
     <section ref={sectionRef} className="py-20 bg-[#F9FAFB] overflow-hidden">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="max-w-full mx-auto px-8 sm:px-6 lg:px-8">
         {/* Main Heading */}
         <div ref={headingRef} className="text-center mb-16">
           <h2 className="text-4xl lg:text-5xl font-bold leading-tight">
@@ -125,7 +125,7 @@ const LegacySection = () => {
         </div>
 
         {/* Three Column Layout */}
-        <div className="grid lg:grid-cols-4 gap-4 items-center">
+        <div className="grid lg:grid-cols-4 gap-6 items-center">
           {/* Left Column - Social Media */}
           <div ref={leftCardRef} className="relative col-span-1">
             <div className="bg-gradient-to-br from-green-300 to-green-500 rounded-4xl p-8 h-80 relative overflow-hidden transform-gpu">

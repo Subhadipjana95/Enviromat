@@ -279,7 +279,7 @@ const HeroSection = () => {
               <div className="flex space-x-4 pt-8">
                 <div 
                   ref={(el) => addToImagesRefs(el, 0)}
-                  className="w-25 h-30 bg-gray-300 rounded-xl overflow-hidden transform-gpu hover:shadow-lg transition-shadow duration-300"
+                  className="w-25 h-30 lg:w-30 lg:h-35 bg-gray-300 rounded-xl overflow-hidden transform-gpu hover:shadow-lg transition-shadow duration-300"
                 >
                   <img
                     src="https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=400&h=400&fit=crop&crop=center"
@@ -289,7 +289,7 @@ const HeroSection = () => {
                 </div>
                 <div 
                   ref={(el) => addToImagesRefs(el, 1)}
-                  className="w-25 h-30 bg-green-200 rounded-xl overflow-hidden transform-gpu hover:shadow-lg transition-shadow duration-300"
+                  className="w-25 h-30 lg:w-30 lg:h-35 bg-green-200 rounded-xl overflow-hidden transform-gpu hover:shadow-lg transition-shadow duration-300"
                 >
                   <img
                     src="https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?w=400&h=400&fit=crop&crop=center"
