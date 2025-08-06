@@ -1,6 +1,38 @@
 import React from "react";
 
+import { useState } from "react"
+import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai"
+import { useDispatch } from "react-redux"
+import { Link, useNavigate } from "react-router-dom"
+
+import { login } from "../../../services/operations/authAPI"
+
 export default function LoginForm() {
+  
+  const navigate = useNavigate()
+  const dispatch = useDispatch()
+  const [formData, setFormData] = useState({
+    email: "",
+    password: "",
+  })
+
+  const [showPassword, setShowPassword] = useState(false)
+
+  const { email, password } = formData
+
+  const handleOnChange = (e) => {
+    setFormData((prevData) => ({
+      ...prevData,
+      [e.target.name]: e.target.value,
+    }))
+  }
+
+  const handleOnSubmit = (e) => {
+    console.log("Form submitted:", formData);
+    e.preventDefault()
+    dispatch(login(email, password, navigate))
+  }
+
   return (
     <div className="w-[400px] border border-gray-300 rounded-2xl p-6">
       <h2 className="text-2xl font-bold text-center text-gray-800 mb-6">
@@ -10,63 +42,58 @@ export default function LoginForm() {
         Login to access your account and enjoy our services.
       </p>
 
-      <form className="space-y-6" onSubmit={(e) => e.preventDefault()}>
-        <div>
-          <label
-            htmlFor="loginMobile"
-            className="block text-gray-700 font-semibold mb-1"
-          >
-            Mobile Number
-          </label>
+        <form
+        onSubmit={handleOnSubmit}
+        className="mt-6 flex w-full flex-col gap-y-4"
+      >
+        <label className="w-full">
+          <p className="mb-1 text-[0.875rem] leading-[1.375rem] text-richblack-5">
+            Email Address <sup className="text-pink-200">*</sup>
+          </p>
           <input
-            type="tel"
-            id="loginMobile"
-            name="loginMobile"
-            placeholder="Enter your mobile number"
             required
-            pattern="[0-9]{10}"
-            title="Enter a valid 10 digit mobile number"
-            className="w-full border border-gray-300 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-indigo-400"
+            type="text"
+            name="email"
+            value={email}
+            onChange={handleOnChange}
+            placeholder="Enter email address"
+            className="form-style w-full"
           />
-        </div>
-        <div className="mb-4">
-          <label
-            htmlFor="loginPassword"
-            className="block text-gray-700 font-semibold mb-1"
-          >
-            Password
-          </label>
+        </label>
+        <label className="relative">
+          <p className="mb-1 text-[0.875rem] leading-[1.375rem] text-richblack-5">
+            Password <sup className="text-pink-200">*</sup>
+          </p>
           <input
-            type="password"
-            id="loginPassword"
-            name="loginPassword"
-            placeholder="Enter your password"
             required
-            className="w-full border border-gray-300 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-indigo-400"
-            autoComplete="current-password"
+            type={showPassword ? "text" : "password"}
+            name="password"
+            value={password}
+            onChange={handleOnChange}
+            placeholder="Enter Password"
+            className="form-style w-full !pr-10"
           />
-        </div>
-        <div>
-          <label
-            htmlFor="loginEmail"
-            className="block text-gray-700 font-semibold mb-1"
+          <span
+            onClick={() => setShowPassword((prev) => !prev)}
+            className="absolute right-3 top-[38px] z-[10] cursor-pointer"
           >
-            Email ID
-          </label>
-          <input
-            type="email"
-            id="loginEmail"
-            name="loginEmail"
-            placeholder="Enter your email"
-            required
-            className="w-full border border-gray-300 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-indigo-400"
-          />
-        </div>
+            {showPassword ? (
+              <AiOutlineEyeInvisible fontSize={24} fill="#AFB2BF" />
+            ) : (
+              <AiOutlineEye fontSize={24} fill="#AFB2BF" />
+            )}
+          </span>
+          <Link to="/forgot-password">
+            <p className="mt-1 ml-auto max-w-max text-xs text-blue-100">
+              Forgot Password
+            </p>
+          </Link>
+        </label>
         <button
           type="submit"
-          className="w-full bg-[#C27BFF] hover:bg-[#C27BFF] text-white font-semibold py-2 rounded-lg transition"
+          className="mt-6 rounded-[8px] bg-yellow-50 py-[8px] px-[12px] font-medium text-richblack-900"
         >
-          Login
+          log In
         </button>
       </form>
       <p className="text-center text-gray-600 mt-4">
