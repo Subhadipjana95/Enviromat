@@ -1,12 +1,12 @@
 import React from 'react';
 import Lenis from 'lenis'
 import 'lenis/dist/lenis.css'
-import Navbar from './components/Navbar';
-import HeroSection from './components/HeroSection';
-import LegacySection from './components/LegacySection';
-import ServicesCard from './components/ServicesCard';
-import SignupForm from './components/SignupForm';
-import LoginForm from './components/LoginForm';
+import Navbar from './components/common/Navbar';
+import Home from './Pages/Home';
+import SignupForm from './components/core/Auth/SignupForm';
+import LoginForm from './components/core/Auth/LoginForm';
+import { Routes } from 'react-router-dom';
+import { Route } from 'lucide-react';
 
 
 // Lenis Code --->>>
@@ -36,9 +36,11 @@ function App() {
       <div className="fixed w-full z-50">
         <Navbar />
       </div>
-      <HeroSection />
-      <LegacySection />
-      <ServicesCard />
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/signup" element={<LegacySection />} />
+        <Route path="/login" element={<ServicesCard />} />
+      </Routes>
     </div>
   );
 }
