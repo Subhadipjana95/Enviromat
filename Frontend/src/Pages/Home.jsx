@@ -1,8 +1,8 @@
 import HeroSection from "../components/core/Home/HeroSection";
 import LegacySection from "../components/core/Home/LegacySection";
 import ServicesCard from "../components/core/Home/ServicesCard";
-import TestimonialSection from "../components/TestimonialSection";
-import Footer from "../components/Footer";
+import TestimonialSection from "../components/core/Home/TestimonialSection";
+import Footer from "../components/common/Footer";
 import React, { useEffect, useRef } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
