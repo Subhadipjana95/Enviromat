@@ -28,3 +28,13 @@ body {
     transform: translateX(0%);
   }
 }
+
+.serviceCard {
+  will-change: transform, opacity;
+  backface-visibility: hidden;
+  perspective: 1000px;
+}
+
+.serviceCardContainer {
+  transform-style: preserve-3d;
+}
