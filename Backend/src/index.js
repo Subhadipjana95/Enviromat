@@ -5,6 +5,9 @@ const cookieParser = require("cookie-parser");
 const fileUpload = require("express-fileupload");
 const dotenv = require("dotenv");
 require("dotenv").config();
+const cors = require("cors");
+
+const userRoutes = require("./routes/user");
 
 // Middlewares
 const app = express();
@@ -13,6 +16,26 @@ app.use(cookieParser());
 
 const PORT = process.env.PORT || 4000;
 
+const allowedOrigins = [
+  "http://localhost:3000",//frontend port
+  "http://localhost:5173",
+  "http://localhost:5174",
+]
+
+app.use(
+  cors({
+    origin: function (origin, callback) {
+      if (!origin || allowedOrigins.includes(origin)) {
+        callback(null, true)
+      } else {
+        callback(new Error("Not allowed by CORS"))
+      }
+    },
+    credentials: true,
+  })
+)
+
+
 app.use(
 	fileUpload({
 		useTempFiles: true,
@@ -20,17 +43,17 @@ app.use(
 	})
 );
 
+// Setting up routes
+app.use("/api/v1/auth", userRoutes);
 
 
 
-
-
-app.get("/", (req, res) => {
-	return res.json({
-		success: true,
-		message: "Your server is up and running ...",
-	});
-});
+// app.get("/", (req, res) => {
+// 	return res.json({
+// 		success: true,
+// 		message: "Your server is up and running ...",
+// 	});
+// });
 
 
 const InitlizeConnection = async()=>{
