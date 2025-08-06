@@ -1,10 +1,11 @@
+const dotenv = require("dotenv");
+require("dotenv").config();
+
 const express = require("express")
 const {dbconnect} =require("./config/database")
 const cloudinary = require("./config/cloudinary");
 const cookieParser = require("cookie-parser");
 const fileUpload = require("express-fileupload");
-const dotenv = require("dotenv");
-require("dotenv").config();
 const userRoutes = require("./routes/user");
 
 // Middlewares
@@ -23,7 +24,6 @@ app.use(
 
 // Setting up routes
 app.use("/api/v1/auth", userRoutes);
-
 
 
 // app.get("/", (req, res) => {
