@@ -142,7 +142,7 @@ exports.login = async (req, res) => {
     }
 
     // Find user with provided email
-    const user = await User.findOne({ email }).populate("additionalDetails")
+    const user = await User.findOne({ email });
 
     // If user not found with provided email
     if (!user) {

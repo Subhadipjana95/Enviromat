@@ -1,12 +1,16 @@
 import React from 'react';
 import Lenis from 'lenis'
 import 'lenis/dist/lenis.css'
-import Navbar from './components/Navbar';
-import HeroSection from './components/HeroSection';
-import LegacySection from './components/LegacySection';
-import ServicesCard from './components/ServicesCard';
-import SignupForm from './components/SignupForm';
-import LoginForm from './components/LoginForm';
+
+// import OpenRoute from "./components/core/Auth/OpenRoute";
+// import PrivateRoute from "./components/core/Auth/PrivateRoute";
+
+
+import Navbar from './components/common/Navbar';
+import Home from './Pages/Home';
+import Login from './Pages/Login';
+import SignUp from './Pages/SignUp';
+import { Route, Routes, useLocation, useNavigate } from 'react-router-dom';
 
 
 // Lenis Code --->>>
@@ -31,14 +35,30 @@ import LoginForm from './components/LoginForm';
 
 
 function App() {
+  const location = useLocation();
+  const hideNavbar = location.pathname === '/login' || location.pathname === '/signup';
   return (
     <div className="min-h-screen bg-gray-50">
-      <div className="fixed w-full z-50">
-        <Navbar />
-      </div>
-      <HeroSection />
-      <LegacySection />
-      <ServicesCard />
+      {!hideNavbar && (
+        <div className="fixed w-full z-50">
+          <Navbar />
+        </div>
+      )}
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route
+          path="login"
+          element={
+            <Login />
+          }
+        />
+        <Route
+          path="signup"
+          element={
+            <SignUp />
+          }
+        />
+      </Routes>
     </div>
   );
 }
