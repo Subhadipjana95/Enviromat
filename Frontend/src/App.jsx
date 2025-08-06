@@ -1,14 +1,7 @@
 import React from "react";
 import Lenis from "lenis";
 import "lenis/dist/lenis.css";
-import Navbar from "./components/Navbar";
-import HeroSection from "./components/HeroSection";
-import LegacySection from "./components/LegacySection";
-import ServicesCard from "./components/ServicesCard";
-import SignupForm from "./components/SignupForm";
-import LoginForm from "./components/LoginForm";
-import TestimonialSection from "./components/TestimonialSection";
-import Footer from "./components/Footer";
+
 
 
 // import OpenRoute from "./components/core/Auth/OpenRoute";
@@ -21,8 +14,9 @@ import Login from './Pages/Login';
 import SignUp from './Pages/SIgnUp';
 import Error from './Pages/Error';
 import { Route, Routes, useLocation, useNavigate } from 'react-router-dom';
-
-
+import UpdatePassword from './Pages/UpdatePassword';
+import VerifyEmail from './Pages/VerifyEmail';
+import ForgotPassword from './Pages/ForgotPassword';
 // Lenis Code --->>>
 
 // // Initialize Lenis
@@ -65,6 +59,24 @@ function App() {
           path="signup"
           element={
             <SignUp />
+          }
+        />
+        <Route
+          path="update-password/:id"
+          element={
+              <UpdatePassword />
+          }
+        />
+        <Route
+          path="verify-email"
+          element={
+              <VerifyEmail />
+          }
+        />
+        <Route
+          path="forgot-password"
+          element={
+              <ForgotPassword />
           }
         />
         <Route path="*" element={<Error />} />

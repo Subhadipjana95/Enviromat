@@ -1,116 +1,169 @@
-import React, { useState } from "react";
+import { useState } from "react"
+import { toast } from "react-hot-toast"
+import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai"
+import { useDispatch } from "react-redux"
+import { useNavigate } from "react-router-dom"
+
+import { sendOtp } from "../../../services/operations/authAPI"
+import { setSignupData } from "../../../slices/authSlice"
 
 export default function SignupForm() {
-  const [isGoogleSignup, setIsGoogleSignup] = useState(false);
+  
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+
+   const [formData, setFormData] = useState({
+    firstName: "",
+    lastName: "",
+    email: "",
+    password: "",
+    confirmPassword: "",
+  })
+
+  const [showPassword, setShowPassword] = useState(false)
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false)
+
+  const { firstName, lastName, email, password, confirmPassword } = formData
+
+
+  const handleOnChange = (e) => {
+    setFormData((prevData) => ({
+      ...prevData,
+      [e.target.name]: e.target.value,
+    }))
+  }
+
+   // Handle Form Submission
+  const handleOnSubmit = (e) => {
+    e.preventDefault()
+
+    if (password !== confirmPassword) {
+      toast.error("Passwords Do Not Match")
+      return
+    }
+    const signupData = {
+      ...formData,
+    }
+    dispatch(setSignupData(signupData))
+    // Send OTP to user for verification
+    dispatch(sendOtp(formData.email, navigate))
+
+    // Reset
+    setFormData({
+      firstName: "",
+      lastName: "",
+      email: "",
+      password: "",
+      confirmPassword: "",
+    })
+  }
 
   return (
       <div className="w-[400px] border border-gray-300 rounded-2xl p-6">
         <h2 className="text-2xl font-bold text-center mb-6">Sign Up</h2>
 
-        {!isGoogleSignup ? (
-          <>
-            <button
-              onClick={() => setIsGoogleSignup(true)}
-              className="w-full mb-6 flex items-center justify-center gap-3 border border-gray-300 rounded-lg py-2 hover:bg-gray-100 transition"
-            >
-              <img
-                src="https://img.icons8.com/color/24/google-logo.png"
-                alt="Google"
+         <form onSubmit={handleOnSubmit} className="flex w-full flex-col gap-y-4">
+          <div className="flex gap-x-4">
+            <label>
+              <p className="mb-1 text-[0.875rem] leading-[1.375rem] text-richblack-5">
+                First Name <sup className="text-pink-200">*</sup>
+              </p>
+              <input
+                required
+                type="text"
+                name="firstName"
+                value={firstName}
+                onChange={handleOnChange}
+                placeholder="Enter first name"
+                className="form-style w-full"
               />
-              Continue with Google
-            </button>
-            <div className="text-center mb-6 text-gray-500">
-              Or sign up manually
-            </div>
-
-            <form className="space-y-4" onSubmit={(e) => e.preventDefault()}>
-              <div>
-                <label
-                  htmlFor="name"
-                  className="block text-gray-700 font-semibold mb-1"
-                >
-                  Name
-                </label>
-                <input
-                  type="text"
-                  id="name"
-                  name="name"
-                  placeholder="Enter your name"
-                  required
-                  className="w-full border border-gray-300 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-indigo-400"
-                />
-              </div>
-              <div>
-                <label
-                  htmlFor="address"
-                  className="block text-gray-700 font-semibold mb-1"
-                >
-                  Address
-                </label>
-                <input
-                  type="text"
-                  id="address"
-                  name="address"
-                  placeholder="Enter your address"
-                  required
-                  className="w-full border border-gray-300 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-indigo-400"
-                />
-              </div>
-              <div>
-                <label
-                  htmlFor="mobile"
-                  className="block text-gray-700 font-semibold mb-1"
-                >
-                  Mobile Number
-                </label>
-                <input
-                  type="tel"
-                  id="mobile"
-                  name="mobile"
-                  placeholder="Enter your mobile number"
-                  required
-                  pattern="[0-9]{10}"
-                  title="Enter a valid 10 digit mobile number"
-                  className="w-full border border-gray-300 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-indigo-400"
-                />
-              </div>
-              <div>
-                <label
-                  htmlFor="email"
-                  className="block text-gray-700 font-semibold mb-1"
-                >
-                  Email ID
-                </label>
-                <input
-                  type="email"
-                  id="email"
-                  name="email"
-                  placeholder="Enter your email"
-                  required
-                  className="w-full border border-gray-300 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-indigo-400"
-                />
-              </div>
-              <button
-                type="submit"
-                className="w-full bg-[#08DF73] hover:bg-[#08df73] text-white font-semibold py-2 rounded-lg transition"
-              >
-                Sign Up
-              </button>
-            </form>
-          </>
-        ) : (
-          <div className="text-center space-y-4">
-            <p className="text-gray-700 font-semibold text-lg">
-              Signing up with Google...
-            </p>
-            <button
-              onClick={() => setIsGoogleSignup(false)}
-              className="px-6 py-2 border border-[#C27BFF] text-[#C27BFF] rounded-lg hover:bg-indigo-50 transition"
-            >
-              Cancel Google Signup
-            </button>
+            </label>
+            <label>
+              <p className="mb-1 text-[0.875rem] leading-[1.375rem] text-richblack-5">
+                Last Name <sup className="text-pink-200">*</sup>
+              </p>
+              <input
+                required
+                type="text"
+                name="lastName"
+                value={lastName}
+                onChange={handleOnChange}
+                placeholder="Enter last name"
+                className="form-style w-full"
+              />
+            </label>
           </div>
-        )}
+          <label className="w-full">
+            <p className="mb-1 text-[0.875rem] leading-[1.375rem] text-richblack-5">
+              Email Address <sup className="text-pink-200">*</sup>
+            </p>
+            <input
+              required
+              type="text"
+              name="email"
+              value={email}
+              onChange={handleOnChange}
+              placeholder="Enter email address"
+              className="form-style w-full"
+            />
+          </label>
+          <div className="flex gap-x-4">
+            <label className="relative">
+              <p className="mb-1 text-[0.875rem] leading-[1.375rem] text-richblack-5">
+                Create Password <sup className="text-pink-200">*</sup>
+              </p>
+              <input
+                required
+                type={showPassword ? "text" : "password"}
+                name="password"
+                value={password}
+                onChange={handleOnChange}
+                placeholder="Enter Password"
+                className="form-style w-full !pr-10"
+              />
+              <span
+                onClick={() => setShowPassword((prev) => !prev)}
+                className="absolute right-3 top-[38px] z-[10] cursor-pointer"
+              >
+                {showPassword ? (
+                  <AiOutlineEyeInvisible fontSize={24} fill="#AFB2BF" />
+                ) : (
+                  <AiOutlineEye fontSize={24} fill="#AFB2BF" />
+                )}
+              </span>
+            </label>
+            <label className="relative">
+              <p className="mb-1 text-[0.875rem] leading-[1.375rem] text-richblack-5">
+                Confirm Password <sup className="text-pink-200">*</sup>
+              </p>
+              <input
+                required
+                type={showConfirmPassword ? "text" : "password"}
+                name="confirmPassword"
+                value={confirmPassword}
+                onChange={handleOnChange}
+                placeholder="Confirm Password"
+                className="form-style w-full !pr-10"
+              />
+              <span
+                onClick={() => setShowConfirmPassword((prev) => !prev)}
+                className="absolute right-3 top-[38px] z-[10] cursor-pointer"
+              >
+                {showConfirmPassword ? (
+                  <AiOutlineEyeInvisible fontSize={24} fill="#AFB2BF" />
+                ) : (
+                  <AiOutlineEye fontSize={24} fill="#AFB2BF" />
+                )}
+              </span>
+            </label>
+          </div>
+          <button
+            type="Submit"
+            className="mt-6 rounded-[8px] bg-yellow-50 py-[8px] px-[12px] font-medium text-richblack-900"
+          >
+            Create Account
+          </button>
+        </form>
       </div>
   );
 }
