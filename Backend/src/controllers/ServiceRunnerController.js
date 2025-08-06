@@ -1,8 +1,6 @@
 const ServiceRunner=require("../models/ServiceRunnerModel")
-const { auth } = require("../middleware/auth");
 const Order = require("../models/Order");
 const PickupRequest = require("../models/PickupRequest");
-
 
 
 // 1. Add to runner's bag (order or pickup)
@@ -119,7 +117,7 @@ exports.doneDeliverOrPickup = async (req, res) => {
         (id) => id.toString() !== itemId
       );
 
-      runner.creditPoints += 10; // 🎁 10 points per pickup
+      runner.creditPoints += 10;
     } else {
       return res.status(400).json({ error: "Invalid type" });
     }
