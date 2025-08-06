@@ -1,8 +1,8 @@
 import React from 'react'
-import SignupForm from '../components/'
+import SignupForm from '../components/core/Auth/SignupForm'
 
 
-const SIgnUp = () => {
+const Signup = () => {
   return (
     <div className='w-full h-full flex items-center justify-center'>
       <SignupForm />
@@ -10,4 +10,4 @@ const SIgnUp = () => {
   )
 }
 
-export default SIgnUp
+export default Signup
