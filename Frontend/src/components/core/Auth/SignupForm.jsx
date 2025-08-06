@@ -3,6 +3,7 @@ import { toast } from "react-hot-toast"
 import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai"
 import { useDispatch } from "react-redux"
 import { useNavigate } from "react-router-dom"
+import { Link } from "react-router-dom"
 
 import { sendOtp } from "../../../services/operations/authAPI"
 import { setSignupData } from "../../../slices/authSlice"
@@ -175,6 +176,14 @@ export default function SignupForm() {
             Create Account
           </button>
         </form>
+        <div className="mt-8 text-center">
+          <p className="text-green-700 text-base">
+            Already have an account?{" "}
+            <Link to="/login" className="text-green-600 hover:text-green-500 font-semibold transition-colors duration-200">
+              Log in
+            </Link>
+          </p>
+        </div>
       </div>
   );
 }
