@@ -59,14 +59,22 @@ export default function SignupForm() {
   }
 
   return (
-      <div className="w-[400px] border border-gray-300 rounded-2xl p-6">
-        <h2 className="text-2xl font-bold text-center mb-6">Sign Up</h2>
+      <div className="w-full max-w-lg bg-white/80 backdrop-blur-lg rounded-2xl shadow-2xl border border-green-300/50 p-8">
+        <div className="text-center mb-8">
+          <div className="w-16 h-16 bg-green-500 rounded-full flex items-center justify-center mx-auto mb-4">
+            <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M18 9v3m0 0v3m0-3h3m-3 0h-3m-2-5a4 4 0 11-8 0 4 4 0 018 0zM3 20a6 6 0 0112 0v1H3v-1z" />
+            </svg>
+          </div>
+          <h2 className="text-green-800 font-bold text-3xl mb-2">Create Account</h2>
+          <p className="text-green-700 text-base">Join our eco-conscious community today</p>
+        </div>
 
-         <form onSubmit={handleOnSubmit} className="flex w-full flex-col gap-y-4">
-          <div className="flex gap-x-4">
-            <label>
-              <p className="mb-1 text-[0.875rem] leading-[1.375rem] text-richblack-5">
-                First Name <sup className="text-pink-200">*</sup>
+         <form onSubmit={handleOnSubmit} className="space-y-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <label className="block">
+              <p className="mb-2 text-green-800 text-sm font-medium">
+                First Name <sup className="text-red-500">*</sup>
               </p>
               <input
                 required
@@ -75,12 +83,12 @@ export default function SignupForm() {
                 value={firstName}
                 onChange={handleOnChange}
                 placeholder="Enter first name"
-                className="form-style w-full"
+                className="w-full px-4 py-3 border-2 border-green-400/60 bg-white/70 backdrop-blur-sm rounded-xl text-green-800 text-base focus:border-green-500 focus:outline-none focus:ring-2 focus:ring-green-500/50 transition-all duration-200 hover:border-green-500/70"
               />
             </label>
-            <label>
-              <p className="mb-1 text-[0.875rem] leading-[1.375rem] text-richblack-5">
-                Last Name <sup className="text-pink-200">*</sup>
+            <label className="block">
+              <p className="mb-2 text-green-800 text-sm font-medium">
+                Last Name <sup className="text-red-500">*</sup>
               </p>
               <input
                 required
@@ -89,28 +97,30 @@ export default function SignupForm() {
                 value={lastName}
                 onChange={handleOnChange}
                 placeholder="Enter last name"
-                className="form-style w-full"
+                className="w-full px-4 py-3 border-2 border-green-400/60 bg-white/70 backdrop-blur-sm rounded-xl text-green-800 text-base focus:border-green-500 focus:outline-none focus:ring-2 focus:ring-green-500/50 transition-all duration-200 hover:border-green-500/70"
               />
             </label>
           </div>
-          <label className="w-full">
-            <p className="mb-1 text-[0.875rem] leading-[1.375rem] text-richblack-5">
-              Email Address <sup className="text-pink-200">*</sup>
+          
+          <label className="block">
+            <p className="mb-2 text-green-800 text-sm font-medium">
+              Email Address <sup className="text-red-500">*</sup>
             </p>
             <input
               required
-              type="text"
+              type="email"
               name="email"
               value={email}
               onChange={handleOnChange}
               placeholder="Enter email address"
-              className="form-style w-full"
+              className="w-full px-4 py-3 border-2 border-green-400/60 bg-white/70 backdrop-blur-sm rounded-xl text-green-800 text-base focus:border-green-500 focus:outline-none focus:ring-2 focus:ring-green-500/50 transition-all duration-200 hover:border-green-500/70"
             />
           </label>
-          <div className="flex gap-x-4">
-            <label className="relative">
-              <p className="mb-1 text-[0.875rem] leading-[1.375rem] text-richblack-5">
-                Create Password <sup className="text-pink-200">*</sup>
+          
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <label className="relative block">
+              <p className="mb-2 text-green-800 text-sm font-medium">
+                Create Password <sup className="text-red-500">*</sup>
               </p>
               <input
                 required
@@ -119,22 +129,22 @@ export default function SignupForm() {
                 value={password}
                 onChange={handleOnChange}
                 placeholder="Enter Password"
-                className="form-style w-full !pr-10"
+                className="w-full px-4 py-3 pr-12 border-2 border-green-400/60 bg-white/70 backdrop-blur-sm rounded-xl text-green-800 text-base focus:border-green-500 focus:outline-none focus:ring-2 focus:ring-green-500/50 transition-all duration-200 hover:border-green-500/70"
               />
               <span
                 onClick={() => setShowPassword((prev) => !prev)}
-                className="absolute right-3 top-[38px] z-[10] cursor-pointer"
+                className="absolute right-3 top-[42px] z-[10] cursor-pointer text-green-600 hover:text-green-700 transition-colors"
               >
                 {showPassword ? (
-                  <AiOutlineEyeInvisible fontSize={24} fill="#AFB2BF" />
+                  <AiOutlineEyeInvisible fontSize={20} />
                 ) : (
-                  <AiOutlineEye fontSize={24} fill="#AFB2BF" />
+                  <AiOutlineEye fontSize={20} />
                 )}
               </span>
             </label>
-            <label className="relative">
-              <p className="mb-1 text-[0.875rem] leading-[1.375rem] text-richblack-5">
-                Confirm Password <sup className="text-pink-200">*</sup>
+            <label className="relative block">
+              <p className="mb-2 text-green-800 text-sm font-medium">
+                Confirm Password <sup className="text-red-500">*</sup>
               </p>
               <input
                 required
@@ -143,23 +153,24 @@ export default function SignupForm() {
                 value={confirmPassword}
                 onChange={handleOnChange}
                 placeholder="Confirm Password"
-                className="form-style w-full !pr-10"
+                className="w-full px-4 py-3 pr-12 border-2 border-green-400/60 bg-white/70 backdrop-blur-sm rounded-xl text-green-800 text-base focus:border-green-500 focus:outline-none focus:ring-2 focus:ring-green-500/50 transition-all duration-200 hover:border-green-500/70"
               />
               <span
                 onClick={() => setShowConfirmPassword((prev) => !prev)}
-                className="absolute right-3 top-[38px] z-[10] cursor-pointer"
+                className="absolute right-3 top-[42px] z-[10] cursor-pointer text-green-600 hover:text-green-700 transition-colors"
               >
                 {showConfirmPassword ? (
-                  <AiOutlineEyeInvisible fontSize={24} fill="#AFB2BF" />
+                  <AiOutlineEyeInvisible fontSize={20} />
                 ) : (
-                  <AiOutlineEye fontSize={24} fill="#AFB2BF" />
+                  <AiOutlineEye fontSize={20} />
                 )}
               </span>
             </label>
           </div>
+          
           <button
-            type="Submit"
-            className="mt-6 rounded-[8px] bg-yellow-50 py-[8px] px-[12px] font-medium text-richblack-900"
+            type="submit"
+            className="w-full bg-gradient-to-r from-green-500 to-emerald-600 hover:from-green-600 hover:to-emerald-700 text-white font-semibold py-4 px-6 rounded-xl transition-all duration-200 transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-green-400/50 shadow-lg"
           >
             Create Account
           </button>

@@ -38,7 +38,7 @@ import ForgotPassword from './Pages/ForgotPassword';
 
 function App() {
   const location = useLocation();
-  const hideNavbar = location.pathname === '/login' || location.pathname === '/signup';
+  const hideNavbar = location.pathname === '/login' || location.pathname === '/signup'|| location.pathname === '/verify-email'|| location.pathname === '/forgot-password'||location.pathname.startsWith('/update-password/');
   return (
     <div className="min-h-screen bg-gray-50">
 
