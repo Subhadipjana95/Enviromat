@@ -5,9 +5,30 @@ const jwt = require("jsonwebtoken")
 const otpGenerator = require("otp-generator")
 const mailSender = require("../utils/mailSender")
 const { passwordUpdated } = require("../mail/templates/passwordUpdate")
+const {handleAuthSuccess} = require('../utils/tokenGenerator');
 require("dotenv").config()
+const validator = require("validator")
 
 // Signup Controller for Registering USers
+
+// Helper function for email and password validation
+function validateEmailAndPassword(email, password, res) {
+    if (!validator.isEmail(email)) {
+        res.status(403).json({
+            success: false,
+            message: "Invalid Email",
+        });
+        return false;
+    }
+    if (!validator.isStrongPassword(password)) {
+        res.status(403).json({
+            success: false,
+            message: "Weak Password",
+        });
+        return false;
+    }
+    return true;
+}
 
 exports.signup = async (req, res) => {
   try {
@@ -35,6 +56,10 @@ exports.signup = async (req, res) => {
         success: false,
         message: "All Fields are required",
       })
+    }
+    //validator
+    if (!validateEmailAndPassword(email, password, res)) {
+        return;
     }
     // Check if password and confirm password match
     if (password !== confirmPassword) {
@@ -74,6 +99,7 @@ exports.signup = async (req, res) => {
     // Hash the password
     const hashedPassword = await bcrypt.hash(password, 10)
 
+    
     const user = await User.create({
       firstName,
       lastName,
@@ -81,14 +107,12 @@ exports.signup = async (req, res) => {
       contactNumber,
       password: hashedPassword,
       accountType: accountType,
-      image: "",
+      image: `https://api.dicebear.com/5.x/initials/svg?seed=${firstName}%20${lastName}`,
     })
 
-    return res.status(200).json({
-      success: true,
-      user,
-      message: "User registered successfully",
-    })
+    // token generation, user object transformation, and response
+    handleAuthSuccess(user, res, "User registered successfully");
+
   } catch (error) {
     console.error(error)
     return res.status(500).json({
@@ -113,6 +137,10 @@ exports.login = async (req, res) => {
       })
     }
 
+    if (!validateEmailAndPassword(email, password, res)) {
+      return;
+    }
+
     // Find user with provided email
     const user = await User.findOne({ email }).populate("additionalDetails")
 
@@ -127,28 +155,8 @@ exports.login = async (req, res) => {
 
     // Generate JWT token and Compare Password
     if (await bcrypt.compare(password, user.password)) {
-      const token = jwt.sign(
-        { email: user.email, id: user._id, accountType:user.accountType }, //role: user.role
-        process.env.JWT_SECRET,
-        {
-          expiresIn: "24h",
-        }
-      )
-       
-      // Save token to user document in database
-      user.token = token
-      user.password = undefined
-      // Set cookie for token and return success response
-      const options = {
-        expires: new Date(Date.now() + 3 * 24 * 60 * 60 * 1000),
-        httpOnly: true,
-      }
-      res.cookie("token", token, options).status(200).json({
-        success: true,
-        token,
-        user,
-        message: `User Login Success`,
-      })
+        // token generation, user object transformation, and response
+        return handleAuthSuccess(user, res, "User logged in successfully");
     } else {
       return res.status(401).json({
         success: false,
@@ -195,7 +203,10 @@ exports.sendotp = async (req, res) => {
     while (result) {
       otp = otpGenerator.generate(6, {
         upperCaseAlphabets: false,
+        lowerCaseAlphabets: false,
+        specialChars: false,
       })
+      result = await OTP.findOne({ otp: otp })
     }
     const otpPayload = { email, otp }
     const otpBody = await OTP.create(otpPayload)
@@ -232,11 +243,14 @@ exports.changePassword = async (req, res) => {
         .json({ success: false, message: "The password is incorrect" })
     }
 
+    if (!validateEmailAndPassword(userDetails.email, newPassword, res)) {
+        return;
+    }
     // Update password
-    const encryptedPassword = await bcrypt.hash(newPassword, 10)
+    const hashPassword = await bcrypt.hash(newPassword, 10)
     const updatedUserDetails = await User.findByIdAndUpdate(
       req.user.id,
-      { password: encryptedPassword },
+      { password: hashPassword },
       { new: true }
     )
 

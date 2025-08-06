@@ -5,6 +5,7 @@ const cookieParser = require("cookie-parser");
 const fileUpload = require("express-fileupload");
 const dotenv = require("dotenv");
 require("dotenv").config();
+const userRoutes = require("./routes/user");
 
 // Middlewares
 const app = express();
@@ -20,17 +21,17 @@ app.use(
 	})
 );
 
+// Setting up routes
+app.use("/api/v1/auth", userRoutes);
 
 
 
-
-
-app.get("/", (req, res) => {
-	return res.json({
-		success: true,
-		message: "Your server is up and running ...",
-	});
-});
+// app.get("/", (req, res) => {
+// 	return res.json({
+// 		success: true,
+// 		message: "Your server is up and running ...",
+// 	});
+// });
 
 
 const InitlizeConnection = async()=>{
