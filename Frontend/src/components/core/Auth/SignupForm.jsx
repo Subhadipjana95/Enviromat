@@ -4,7 +4,8 @@ import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai"
 import { useDispatch } from "react-redux"
 import { useNavigate } from "react-router-dom"
 import { Link } from "react-router-dom"
-
+import { ACCOUNT_TYPE } from "../../../utils/constants"
+import Tab from "../../common/Tab";
 import { sendOtp } from "../../../services/operations/authAPI"
 import { setSignupData } from "../../../slices/authSlice"
 
@@ -12,7 +13,8 @@ export default function SignupForm() {
   
   const navigate = useNavigate();
   const dispatch = useDispatch();
-
+  // user or picker
+  const [accountType, setAccountType] = useState(ACCOUNT_TYPE.USER)
    const [formData, setFormData] = useState({
     firstName: "",
     lastName: "",
@@ -44,6 +46,7 @@ export default function SignupForm() {
     }
     const signupData = {
       ...formData,
+      accountType,
     }
     dispatch(setSignupData(signupData))
     // Send OTP to user for verification
@@ -57,7 +60,22 @@ export default function SignupForm() {
       password: "",
       confirmPassword: "",
     })
+    setAccountType(ACCOUNT_TYPE.USER)
   }
+
+
+  const tabData = [
+    {
+      id: 1,
+      tabName: "User",
+      type: ACCOUNT_TYPE.USER,
+    },
+    {
+      id: 2,
+      tabName: "Picker",
+      type: ACCOUNT_TYPE.PICKER,
+    },
+  ]
 
   return (
       <div className="w-full max-w-lg bg-white/80 backdrop-blur-lg rounded-2xl shadow-2xl border border-green-300/50 p-8">
@@ -70,7 +88,8 @@ export default function SignupForm() {
           <h2 className="text-green-800 font-bold text-3xl mb-2">Create Account</h2>
           <p className="text-green-700 text-base">Join our eco-conscious community today</p>
         </div>
-
+        {/* Tab */}
+      <Tab tabData={tabData} field={accountType} setField={setAccountType} />
          <form onSubmit={handleOnSubmit} className="space-y-6">
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <label className="block">
