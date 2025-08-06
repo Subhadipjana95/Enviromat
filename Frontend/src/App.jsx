@@ -18,7 +18,8 @@ import Footer from "./components/Footer";
 import Navbar from './components/common/Navbar';
 import Home from './Pages/Home';
 import Login from './Pages/Login';
-import SignUp from './Pages/SignUp';
+import SignUp from './Pages/SIgnUp';
+import Error from './Pages/Error';
 import { Route, Routes, useLocation, useNavigate } from 'react-router-dom';
 
 
@@ -66,6 +67,7 @@ function App() {
             <SignUp />
           }
         />
+        <Route path="*" element={<Error />} />
       </Routes>
     </div>
   );
