@@ -1,13 +1,14 @@
-import React from 'react';
-import Lenis from 'lenis'
-import 'lenis/dist/lenis.css'
-import Navbar from './components/Navbar';
-import HeroSection from './components/HeroSection';
-import LegacySection from './components/LegacySection';
-import ServicesCard from './components/ServicesCard';
-import SignupForm from './components/SignupForm';
-import LoginForm from './components/LoginForm';
-
+import React from "react";
+import Lenis from "lenis";
+import "lenis/dist/lenis.css";
+import Navbar from "./components/Navbar";
+import HeroSection from "./components/HeroSection";
+import LegacySection from "./components/LegacySection";
+import ServicesCard from "./components/ServicesCard";
+import SignupForm from "./components/SignupForm";
+import LoginForm from "./components/LoginForm";
+import TestimonialSection from "./components/TestimonialSection";
+import Footer from "./components/Footer";
 
 // Lenis Code --->>>
 
@@ -28,8 +29,6 @@ import LoginForm from './components/LoginForm';
 // }
 // requestAnimationFrame(raf);
 
-
-
 function App() {
   return (
     <div className="min-h-screen bg-gray-50">
@@ -38,7 +37,12 @@ function App() {
       </div>
       <HeroSection />
       <LegacySection />
-      <ServicesCard />
+      <div className="realtive mt-10">
+        <ServicesCard />
+        <ServicesCard />
+      </div>
+      <TestimonialSection />
+      <Footer />
     </div>
   );
 }
