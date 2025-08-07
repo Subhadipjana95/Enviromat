@@ -11,6 +11,14 @@ import UpdatePassword from './Pages/UpdatePassword';
 import VerifyEmail from './Pages/VerifyEmail';
 import ForgotPassword from './Pages/ForgotPassword';
 
+import About from './Pages/About';
+import Community from './Pages/Community';  
+import Services from './Pages/Services';
+import Shop from './Pages/Shop';
+
+
+
+
 function App() {
   const location = useLocation();
   const hideNavbar = location.pathname === '/login' || location.pathname === '/signup'|| location.pathname === '/verify-email'|| location.pathname === '/forgot-password'||location.pathname.startsWith('/update-password/');
@@ -24,36 +32,18 @@ function App() {
       )}
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route
-          path="login"
-          element={
-            <Login />
-          }
-        />
-        <Route
-          path="signup"
-          element={
-            <SignUp />
-          }
-        />
-        <Route
-          path="update-password/:id"
-          element={
-              <UpdatePassword />
-          }
-        />
-        <Route
-          path="verify-email"
-          element={
-              <VerifyEmail />
-          }
-        />
-        <Route
-          path="forgot-password"
-          element={
-              <ForgotPassword />
-          }
-        />
+        <Route path="login" element={<Login />} />
+        <Route path="signup" element={<SignUp />} />
+        <Route path="update-password/:id" element={<UpdatePassword />} />
+        <Route path="verify-email" element={<VerifyEmail />} />
+        <Route path="forgot-password" element={<ForgotPassword />} />
+        <Route path="about" element={<About />} />
+        <Route path="community" element={<Community />} />
+        <Route path="services" element={<Services />} />
+        <Route path="shop" element={<Shop />} />
+        {/* Add more routes as needed */}
+        
+        {/* Catch-all route for 404 errors */}
         <Route path="*" element={<Error />} />
       </Routes>
     </div>

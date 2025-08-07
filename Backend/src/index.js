@@ -6,8 +6,10 @@ const fileUpload = require("express-fileupload");
 const dotenv = require("dotenv");
 require("dotenv").config();
 const cors = require("cors");
-
+const wasteRoute=require("./routes/wasteRoute");
+const PostRoute = require("./routes/PostRoute");
 const userRoutes = require("./routes/user");
+const serviceRunnerRoute = require("./routes/serviceRunnerRoute");
 
 // Middlewares
 const app = express();
@@ -45,15 +47,9 @@ app.use(
 
 // Setting up routes
 app.use("/api/v1/auth", userRoutes);
-
-
-
-// app.get("/", (req, res) => {
-// 	return res.json({
-// 		success: true,
-// 		message: "Your server is up and running ...",
-// 	});
-// });
+app.use("/api/v1/posts", PostRoute);
+app.use("/api/v1/waste", wasteRoute);
+app.use("/api/v1/service-runner", serviceRunnerRoute);
 
 
 const InitlizeConnection = async()=>{

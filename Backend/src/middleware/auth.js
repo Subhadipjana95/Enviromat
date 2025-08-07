@@ -12,7 +12,6 @@ exports.auth = async (req, res, next) => {
       (req.header("Authorization")?.startsWith("Bearer ")
         ? req.header("Authorization").split(" ")[1]
         : null);
-
     if (!token) {
       return res.status(401).json({ success: false, message: "Token Missing" });
     }
@@ -51,6 +50,25 @@ exports.isUser = async (req, res, next) => {
 			.json({ success: false, message: `User Role Can't be Verified` });
 	}
 };
+
+exports.isUser = async (req, res, next) => {
+	try {
+		const userDetails = await User.findOne({ email: req.user.email });
+
+		if (userDetails.accountType !== "Picker") {
+			return res.status(401).json({
+				success: false,
+				message: "This is a Protected Route for Pickers",
+			});
+		}
+		next();
+	} catch (error) {
+		return res
+			.status(500)
+			.json({ success: false, message: `User Role Can't be Verified` });
+	}
+};
+
 exports.isAdmin = async (req, res, next) => {
 	try {
 		const userDetails = await User.findOne({ email: req.user.email });

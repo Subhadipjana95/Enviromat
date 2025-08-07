@@ -2,7 +2,7 @@ import { toast } from "react-hot-toast"
 
 import { setLoading, setToken } from "../../slices/authSlice"
 // import { resetCart } from "../../slices/cartSlice"
-// import { setUser } from "../../slices/profileSlice"
+import { setUser } from "../../slices/profileSlice"
 import { apiConnector } from "../apiConnector"
 import { endpoints } from "../apis"
 
@@ -71,7 +71,15 @@ export function signUp(
       if (!response.data.success) {
         throw new Error(response.data.message)
       }
-      toast.success("Signup Successful")
+      toast.success("Signup Successful");
+      
+      dispatch(setToken(response.data.token))
+      const userImage = response.data?.user?.image
+        ? response.data.user.image
+        : `https://api.dicebear.com/5.x/initials/svg?seed=${response.data.user.firstName} ${response.data.user.lastName}`
+      dispatch(setUser({ ...response.data.user, image: userImage }))
+      localStorage.setItem("token", JSON.stringify(response.data.token))
+
       navigate("/")
     } catch (error) {
       console.log("SIGNUP API ERROR............", error)
@@ -106,7 +114,7 @@ export function login(email, password, navigate,token) {
       const userImage = response.data?.user?.image
         ? response.data.user.image
         : `https://api.dicebear.com/5.x/initials/svg?seed=${response.data.user.firstName} ${response.data.user.lastName}`
-      // dispatch(setUser({ ...response.data.user, image: userImage }))
+      dispatch(setUser({ ...response.data.user, image: userImage }))
       localStorage.setItem("token", JSON.stringify(response.data.token))
       navigate("/")
     } catch (error) {
@@ -175,7 +183,7 @@ export function resetPassword(password, confirmPassword, token, navigate) {
 export function logout(navigate) {
   return (dispatch) => {
     dispatch(setToken(null))
-    // dispatch(setUser(null))
+    dispatch(setUser(null))
     // dispatch(resetCart())
     localStorage.removeItem("token")
     localStorage.removeItem("user")

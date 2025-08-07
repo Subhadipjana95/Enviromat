@@ -16,7 +16,6 @@ const userSchema = new mongoose.Schema({
       required: true,
       trim: true,
     },
-    
     email: {
       type: String,
       required: true,
@@ -29,11 +28,10 @@ const userSchema = new mongoose.Schema({
     },
     accountType: {
       type: String,
-      enum: ["Admin", "User"],
+      enum: ["Admin", "User", "Picker"],
       default: "User",
       required: true,
     },
-    
     token: {
       type: String,
     },
