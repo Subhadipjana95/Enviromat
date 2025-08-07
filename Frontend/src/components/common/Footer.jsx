@@ -1,6 +1,6 @@
 import React, { useEffect, useRef } from "react";
 import { Zap } from "lucide-react";
-import { motion } from "motion/react";
+import { motion } from "framer-motion";
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
@@ -134,25 +134,7 @@ const Footer = () => {
   }, []);
 
   return (
-    <footer ref={footerRef} className="bg-black text-white relative overflow-hidden">
-      {/* Animated Background Pattern */}
-      <motion.div
-        className="absolute inset-0 opacity-5"
-        animate={{
-          backgroundPosition: ['0% 0%', '100% 100%'],
-        }}
-        transition={{
-          duration: 25,
-          repeat: Infinity,
-          repeatType: "reverse",
-          ease: "linear"
-        }}
-        style={{
-          backgroundImage: 'radial-gradient(circle, #10B981 1px, transparent 1px)',
-          backgroundSize: '60px 60px',
-        }}
-      />
-
+    <footer ref={footerRef} className="bg-black relative">
       <div className="max-w-full mx-auto px-4 sm:px-6 lg:px-8 pt-16 pb-4 relative z-10">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
           {/* Left Column - Logo and Navigation */}
@@ -341,11 +323,10 @@ const Footer = () => {
           </div>
         </div>
 
-        {/* Big Text - REMOVED up/down animation, only hover scale remains */}
-        <div className="w-full flex items-center justify-center mt-8">
+        <div className="w-full flex items-center justify-center mt-30">
           <motion.span
             ref={bigTextRef}
-            className="text-[140px] font-bold select-none leading-tight tracking-tighter opacity-20 cursor-pointer scale-[1.02]"
+            className="text-[140px] lg:text-[160px] font-bold select-none leading-tight tracking-tighter opacity-20 cursor-pointer scale-[1.02]"
             style={{
               background:
                 "linear-gradient(180deg, #3BF799 30%, #24D152 50%, #000000 100%)",
@@ -398,28 +379,6 @@ const Footer = () => {
             </div>
           </div>
         </motion.div>
-
-        {/* Floating Particles */}
-        {[...Array(3)].map((_, index) => (
-          <motion.div
-            key={index}
-            className="absolute w-2 h-2 bg-green-400/20 rounded-full"
-            style={{
-              left: `${20 + index * 30}%`,
-              top: `${30 + index * 20}%`,
-            }}
-            animate={{
-              y: [-20, 20, -20],
-              opacity: [0.2, 0.6, 0.2],
-            }}
-            transition={{
-              duration: 4 + index,
-              repeat: Infinity,
-              ease: "easeInOut",
-              delay: index * 1.5,
-            }}
-          />
-        ))}
       </div>
     </footer>
   );
