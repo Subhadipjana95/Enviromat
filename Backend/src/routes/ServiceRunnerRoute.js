@@ -3,16 +3,15 @@ const router = express.Router();
 const { auth } = require("../middleware/auth");
 
 const {
-  addOrderOrPickupInBag,
+  addOrderOrPickupToBag,
   removeOrderOrPickupFromBag,
   doneDeliverOrPickup
 } = require("../controllers/ServiceRunnerController");
 
-router.post('/add-to-bag',auth, addOrderOrPickupInBag);
+router.post('/add-to-bag',auth, addOrderOrPickupToBag);
 
 router.post('/remove-from-bag',auth, removeOrderOrPickupFromBag);
 
 router.post('/mark-done',auth, doneDeliverOrPickup);
-
 
 module.exports = router;

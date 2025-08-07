@@ -1,6 +1,6 @@
 const ServiceRunner=require("../models/ServiceRunnerModel")
-const Order = require("../models/Order");
-const PickupRequest = require("../models/PickupRequest");
+const Order = require("../models/OrderModel");
+const PickupRequest = require("../models/PickupRequestModel");
 
 
 // 1. Add to runner's bag (order or pickup)

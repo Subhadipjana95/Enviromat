@@ -16,7 +16,6 @@ const userSchema = new mongoose.Schema({
       required: true,
       trim: true,
     },
-    
     email: {
       type: String,
       required: true,
@@ -33,7 +32,6 @@ const userSchema = new mongoose.Schema({
       default: "User",
       required: true,
     },
-    
     token: {
       type: String,
     },
