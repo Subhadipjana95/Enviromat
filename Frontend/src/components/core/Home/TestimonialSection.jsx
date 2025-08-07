@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Star, Quote } from 'lucide-react';
 import { motion, AnimatePresence } from "framer-motion";
-import NumberTicker from './core/Home/AnimatedNumberTicker';
+import NumberTicker from './AnimatedNumberTicker';
 
 const TestimonialSection = () => {
   const [hoveredCard, setHoveredCard] = useState(null);

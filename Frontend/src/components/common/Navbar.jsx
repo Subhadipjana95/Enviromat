@@ -139,7 +139,7 @@ const Navbar = () => {
           <NavigationLinks addToNavButtonsRefs={addToNavButtonsRefs} />
 
           {/* Right side icons */}
-          <div className="flex items-center space-x-2">
+          <div className="flex items-center space-x-2 bg-white/30 backdrop-blur-sm px-2 py-[0.4rem] rounded-full">
             <CoinButton addToIconButtonsRefs={addToIconButtonsRefs} />
             
             {/* Authentication-based buttons */}

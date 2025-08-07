@@ -11,7 +11,8 @@ const NavigationLinks = ({ addToNavButtonsRefs }) => {
   ];
 
   return (
-    <nav className="hidden md:flex items-center space-x-3">
+    <nav className="hidden md:flex items-center space-x-3 bg-white/30 backdrop-blur-sm px-2 py-3 rounded-full">
+
       {links.map((link, index) => (
         <CustomNavLink
           key={link.to}
